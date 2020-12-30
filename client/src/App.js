@@ -1,27 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
-function App() {
-    const [response, setResponse] = useState('Oops, something went wrong...')
-    useEffect(() =>{
-        async function checkAPIRoute() {
-            try {
-                const host = process.env.REACT_APP_HOST || "http://localhost:5000"
-                const response = await fetch(
-                    `${host}/api`
-                )
-                if (response.status === 200) {
-                    setResponse("a Success!!!")
-                }
-            } catch (err) {
-                setResponse("Oops, something went wrong...")
-            }
-        }
-        checkAPIRoute()
-    }, [response])
+class App extends Component {
+  state = {
+    success: null
+  }
 
-  return (
+  componentDidMount() {
+    axios.get('/api')
+    .then(res => this.setState({success: res.data}))
+    .catch(err => console.log(err))
+  }
+
+  render () {
+    return ( 
     <div className="App">
       <header className="App-header">
         <h1>Mern-app</h1>
@@ -37,10 +31,13 @@ function App() {
         >
         </a>
         <h1>The API call is...</h1>
-          <h2>{response}</h2>
+        <div>
+          {this.state.success ? <p>{this.state.success}</p> : null}
+        </div> 
       </header>
     </div>
   );
+  }
 }
 
 export default App;
