@@ -6,7 +6,7 @@ import axios from 'axios';
 class App extends Component {
   state = {
     success: null
-  }
+  };
 
   componentDidMount() {
     axios.get('/api/')
