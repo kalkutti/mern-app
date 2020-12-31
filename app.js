@@ -20,16 +20,14 @@ app.use(express.static(path.join(__dirname, 'client', 'build')))
 app.use(mongoSanitize())
 
 // Setting up a route for our API
-app.get('/api/', (req, res) => {
-    return res.status(200).json({
-        status: "success"
-    })
-})
+app.get('/api/', (req, res) =>
+    res.json('success')
+)
 
 // Redirect back to index.html if urls do not match
-app.get("*", (req, res) => {
+app.get("*", (req, res) =>
     res.sendFile(path.join(__dirname, "client/build", "index.html"))
-})
+)
 
 // Database
 // mongoose
