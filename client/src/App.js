@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Link, Route, Switch } from 'react-router-dom';
+import Blog from './Blog';
 import './App.css';
 import axios from 'axios';
 
@@ -19,17 +20,26 @@ class App extends Component {
     <div className="App">
       <header className="App-header">
         <h1>Mern-app</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
+        <div> 
+          <nav className="navbar navbar-light">
+            <ul className="nav navbar-nav">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/blog">Blog</Link>
+              </li>
+            </ul>
+          </nav>
+            <Switch>
+              <Route exact path="/">
+                <h2>Home</h2>
+              </Route>
+              <Route path="/blog">
+                <Blog />
+              </Route>
+            </Switch>
+        </div>
         <h1>The API call is...</h1>
         <div>
           {this.state.success ? <p>{this.state.success}</p> : null}
