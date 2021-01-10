@@ -1,40 +1,11 @@
 import React from 'react';
 import { Link, Route, useRouteMatch } from 'react-router-dom';
 import BlogDetails from './BlogDetails';
+import { connect } from 'react-redux';
 
-function Blog() {
-    const blogData = [
-      {
-        id: 1,
-        name: "NIKE Liteforce Blue Sneakers",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin molestie.",
-        status: "Available",
-      },
-      {
-        id: 2,
-        name: "Stylised Flip Flops and Slippers",
-        description:
-          "Mauris finibus, massa eu tempor volutpat, magna dolor euismod dolor.",
-        status: "Out of Stock",
-      },
-      {
-        id: 3,
-        name: "ADIDAS Adispree Running Shoes",
-        description:
-          "Maecenas condimentum porttitor auctor. Maecenas viverra fringilla felis, eu pretium.",
-        status: "Available",
-      },
-      {
-        id: 4,
-        name: "ADIDAS Mid Sneakers",
-        description:
-          "Ut hendrerit venenatis lacus, vel lacinia ipsum fermentum vel. Cras.",
-        status: "Out of Stock",
-      },
-    ];
-          
+const Blog = (props) => {          
     const { path, url } = useRouteMatch();
+    const { blogData } = props;
     const linkList = blogData.map((blog) => {
         return (
           <li key={blog.id}>
@@ -57,6 +28,12 @@ function Blog() {
             </Route>
         </div>
     )
+};
+
+const mapStateToProps = (state) => {
+  return {
+    blogData: state.blogData
+  }
 }
 
-export default Blog;
+export default connect(mapStateToProps)(Blog);

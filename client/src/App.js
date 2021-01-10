@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import Blog from './Blog';
-import './App.css';
 import axios from 'axios';
 
 class App extends Component {
