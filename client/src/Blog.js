@@ -23,9 +23,7 @@ const Blog = (props) => {
             <Route exact path={path}>
               <p>Please select a product.</p>
             </Route>
-            <Route path={`${path}/:blogId`}>
-              <BlogDetails data={blogData} />
-            </Route>
+            <Route path={`${path}/:blogId`} component={BlogDetails}/>
         </div>
     )
 };

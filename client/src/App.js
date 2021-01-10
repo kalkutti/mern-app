@@ -34,9 +34,7 @@ class App extends Component {
               <Route exact path="/">
                 <h2>Home</h2>
               </Route>
-              <Route path="/blog">
-                <Blog />
-              </Route>
+              <Route path="/blog" component={Blog}/>
             </Switch>
         </div>
         <h1>The API call is...</h1>

@@ -1,29 +1,28 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { connect } from 'react-redux';
 
-const BlogDetails = ({ data }) => {
-  const { blogId } = useParams();
-  const blog = data.find(p => p.id === Number(blogId));
-  let blogData;
-
-  if (blog) {
-    blogData = (
-      <div>
-        <h3> {blog.name} </h3>
-        <p>{blog.description}</p>
-        <hr />
-        <h4>{blog.status}</h4>
-      </div>
+const BlogDetails = ({ blog }) => {
+  if (!blog) {
+    return (
+      <h2> Sorry. Blog doesn't exist </h2>
     );
   } else {
-    blogData = <h2> Sorry. Blog doesn't exist </h2>;
+    return (
+      <div>
+      <h3> {blog.name} </h3>
+      <p>{blog.description}</p>
+      <hr />
+      <h4>{blog.status}</h4>
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <div>{blogData}</div>
-    </div>
-  );
 };
 
-export default BlogDetails;
+const mapStateToProps = (state, ownProps) => {
+  let id = ownProps.match.params.blogId;
+  return {
+    blog: state.blogData.find(p => p.id === Number(id))
+  }
+}
+
+export default connect(mapStateToProps)(BlogDetails);
